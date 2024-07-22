@@ -1,8 +1,8 @@
 import "./model/counter-component";
 
-import { store } from "./model/store";
+import { createStore} from "./model/store";
 import { add, subtract, reset } from "./model/actions";
-
+import { reducer } from "./model/reducers";
 const testScenarios = () => {
   console.log("Scenario 1 - Initial State: ", store.getState());
 
