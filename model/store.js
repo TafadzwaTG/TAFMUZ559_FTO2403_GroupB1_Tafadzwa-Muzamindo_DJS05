@@ -1,7 +1,7 @@
 
-import { reducer } from "./reducers";
+import { reducer } from "./reducers.js";
 
-export class Store{
+ class Store{
     constructor(reducer) {
         this.state = undefined;
         this.listeners = [];
@@ -24,4 +24,7 @@ export class Store{
     }
 }
 
-export const store = new Store(reducer);
+export function createStore(reducer) {
+   return new Store(reducer);
+}
+export const store = createStore(reducer);

@@ -1,12 +1,21 @@
-import { store, Store } from "./store";
-import { add, subtract, reset } from "./actions";
+
+import { add, subtract, reset } from "./actions.js";
+import { store } from "./store.js";
 
 class CounterComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.store = null;
     this.render();
   }
+
+  setStore(store) {
+    this.store = store;
+    this.updateValue();
+    this.addEventListeners();
+  }
+
   render() {
     this.shadowRoot.innerHTML = `
         <div>
@@ -17,10 +26,10 @@ class CounterComponent extends HTMLElement {
         <h2>Value: <span id="value">0</span></h2>
         `;
   }
-  connectedCallback() {
-    this.updateValue();
-    this.addEventListeners();
-  }
+  // connectedCallback() {
+  //   // this.updateValue();
+  //   // this.addEventListeners();
+  // }
   disconnectedCallback() {
     this.unsubscribe && this.unsubscribe();
   }
@@ -38,9 +47,13 @@ class CounterComponent extends HTMLElement {
     this.unsubscribe = store.subscribe(() => this.updateValue());
   }
   updateValue() {
-    const value = store.getState().value;
-    this.shadowRoot.getElementById("value").textContent = value;
+    if (this.store) {
+      const value = store.getState().value;
+      this.shadowRoot.getElementById("value").textContent = value;
+    }
   }
 }
 
 customElements.define("counter-component", CounterComponent);
+
+export { CounterComponent };
