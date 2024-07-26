@@ -9,7 +9,7 @@ class CounterComponent extends HTMLElement {
     this.store = null;
     this.render();
   }
-
+   //Method to set store and initialize event listeners and state
   setStore(store) {
     this.store = store;
     this.updateValue();

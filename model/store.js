@@ -3,10 +3,10 @@ import { reducer } from "./reducers.js";
 // Store class to manage sate and handle actions
 class Store {
   constructor(reducer) {
-    this.state = undefined; // Initialize sate as undefined
+    this.state = undefined; // Initialize state as undefined
     this.listeners = []; // Initialize an arry to hold listeners
     this.reducer = reducer; // Set the reducer function
-    this.dispatch({ type: "@@INIT" }); // Dispatch an initial action to set up tje state
+    this.dispatch({ type: "@@INIT" }); // Dispatch an initial action to set up the state
   }
 
   // Method to get the current state

@@ -5,7 +5,7 @@ const intialState = {
   value: 0,
 };
 
-// Reducer function to handle state changes based on actins
+// Reducer function to handle state changes based on actions
 export function reducer(state = intialState, action) {
   switch (action.type) {
     // Handle the ADD action
