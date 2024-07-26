@@ -1,7 +1,7 @@
+import { add, subtract, reset } from "../model/actions.js";
+import { store } from "../model/store.js";
 
-import { add, subtract, reset } from "./actions.js";
-import { store } from "./store.js";
-
+//Define the CounterComponent class extending HTMLElement
 class CounterComponent extends HTMLElement {
   constructor() {
     super();
@@ -15,7 +15,7 @@ class CounterComponent extends HTMLElement {
     this.updateValue();
     this.addEventListeners();
   }
-
+  // Method to render the componet's HTML structure
   render() {
     this.shadowRoot.innerHTML = `
         <div>
@@ -26,13 +26,11 @@ class CounterComponent extends HTMLElement {
         <h2>Value: <span id="value">0</span></h2>
         `;
   }
-  // connectedCallback() {
-  //   // this.updateValue();
-  //   // this.addEventListeners();
-  // }
+  // Method called whem the component is removed from the DOM
   disconnectedCallback() {
     this.unsubscribe && this.unsubscribe();
   }
+  // Method to add event listeners to the buttons
   addEventListeners() {
     this.shadowRoot
       .getElementById("add")
@@ -46,14 +44,17 @@ class CounterComponent extends HTMLElement {
 
     this.unsubscribe = store.subscribe(() => this.updateValue());
   }
+
+  //Method to update the displayed value based on the store's state
   updateValue() {
     if (this.store) {
-      const value = store.getState().value;
-      this.shadowRoot.getElementById("value").textContent = value;
+      const value = store.getState().value; //Get the current value from the store
+      this.shadowRoot.getElementById("value").textContent = value; //Updated the displayed value
     }
   }
 }
 
+//Define the custom element
 customElements.define("counter-component", CounterComponent);
 
 export { CounterComponent };
